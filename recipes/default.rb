@@ -42,11 +42,17 @@ execute "extract_tarball" do
   creates "openmpi-#{node['openmpi']['version']}"
 end
 
+if node['openmpi']['support_torque']
+  configure_option = "--prefix=/opt/openmpi-#{node['openmpi']['version']} --with-tm=#{node['openmpi']['torque_dir']}"
+else
+  configure_option = "--prefix=/opt/openmpi-#{node['openmpi']['version']}"
+end
+
 bash "install_openmpi" do
   user "root"
   cwd "/root/source/openmpi-#{node['openmpi']['version']}"
   code <<-EOH
-  ./configure --prefix=/opt/openmpi-#{node['openmpi']['version']}
+  ./configure #{configure_option}
   make
   make install
   EOH
