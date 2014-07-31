@@ -46,9 +46,9 @@ bash "install_openmpi" do
   user "root"
   cwd "/root/source/openmpi-#{node['openmpi']['version']}"
   code <<-EOH
-  echo ./configure --prefix=/opt/openmpi-#{node['openmpi']['version']}
-  echo make
-  echo make install
+  ./configure --prefix=/opt/openmpi-#{node['openmpi']['version']}
+  make
+  make install
   EOH
   creates "/opt/openmpi-#{node['openmpi']['version']}"
 end
