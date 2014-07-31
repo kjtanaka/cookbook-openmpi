@@ -5,4 +5,4 @@ default['openmpi']['install_dir'] = "/opt"
 
 # Optional: Torque
 default['openmpi']['support_torque'] = false
-default['openmpi']['torque_dir'] = "/var/spool/torque"
+default['openmpi']['torque_dir'] = "/opt/torque"
