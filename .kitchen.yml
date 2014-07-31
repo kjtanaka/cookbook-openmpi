@@ -1,0 +1,27 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+  solo_rb:
+    ssl_verify_mode: verify_peer
+
+platforms:
+  - name: centos-6.5
+    driver_config:
+      box: chef/centos-6.5
+      customize:
+        memory: 768
+        cpuexecutioncap: 70
+
+suites:
+  - name: default
+    run_list:
+      - recipe[openmpi::default]
+    attributes: {}
+  - name: modulefile
+    run_list:
+      - recipe[environment-modules::default]
+      - recipe[openmpi::modulefile]
+    attributes: {}
