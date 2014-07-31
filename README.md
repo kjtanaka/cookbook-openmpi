@@ -14,7 +14,7 @@ Attributes
 
 #### openmpi::default
 - `['openmpi']['version']` - OpenMPI version. Default is `1.8.1`.
-- `['openmpi']['download_url']` - Download URL.
+- `['openmpi']['download_url']` - Download URL. Default is `http://www.open-mpi.org/software/ompi/v1.8/downloads/openmpi-1.8.1.tar.bz2`.
 - `['openmpi']['download_dir']` - Download directory. Default is `/root/source`.
 - `['openmpi']['install_dir']` - Install directory. Default is `/opt`.
 
