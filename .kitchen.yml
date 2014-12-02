@@ -1,19 +1,19 @@
 ---
-driver:
-  name: vagrant
+driver_plugin: digitalocean
+driver_config:
+  digitalocean_client_id: <%= ENV['DIGITALOCEAN_CLIENT_ID'] %>
+  digitalocean_api_key: <%= ENV['DIGITALOCEAN_API_KEY'] %>
+  ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY_PATH'] %>
+  ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
 
 provisioner:
   name: chef_solo
-  solo_rb:
-    ssl_verify_mode: verify_peer
 
 platforms:
   - name: centos-6.5
+    driver_plugin: digitalocean
     driver_config:
-      box: chef/centos-6.5
-      customize:
-        memory: 768
-        cpuexecutioncap: 70
+      image_id: 3448641
 
 suites:
   - name: default
@@ -22,6 +22,12 @@ suites:
     attributes: {}
   - name: modulefile
     run_list:
+      - recipe[environment-modules::default]
+      - recipe[openmpi::modulefile]
+    attributes: {}
+  - name: all
+    run_list:
+      - recipe[openmpi::default]
       - recipe[environment-modules::default]
       - recipe[openmpi::modulefile]
     attributes: {}
